@@ -1,0 +1,89 @@
+﻿@using Abp.Web.Mvc.Extensions
+@{
+    Layout = "~/Views/Shared/_SinglePageLayout.cshtml";
+}
+
+
+@section pageStyles
+{
+
+    @Html.IncludeStyle("~/Content/flags/famfamfam-flags.css")
+    @Html.IncludeStyle("~/Metronic/assets/pages/css/login.min.css")
+    @Html.IncludeStyle("~/Views/Account/_Layout.css")
+}
+@section pageLoadBeforScripts
+{
+    <script type="text/javascript">
+        $('body').addClass("login");
+    </script>
+
+    @Html.IncludeScript("~/Views/Account/Login.js")
+}
+@section pageLoadAfterScripts{
+    <script>
+        jQuery(document).ready(function () {
+            if (CurrentPage) {
+                CurrentPage.init();
+            }
+        });
+    </script>
+
+}
+<!-- BEGIN LOGO -->
+<div class="logo">
+    <a href="#l">
+        <img src="~/Metronic/assets/pages/img/logo-big.png" alt="" />
+    </a>
+</div>
+<!-- END LOGO -->
+<!-- BEGIN LOGIN -->
+<div id="LoginArea" class="content">
+    <!-- BEGIN LOGIN FORM -->
+    <!-- END LOGIN FORM -->
+    <form id="LoginForm" class="login-form" action="@(Url.Action("Login", "Account"))?returnUrl=@(Model.ReturnUrl)" method="POST">
+        <h3 class="form-title font-green">@L("LogIn")</h3>
+        <div class="alert alert-danger display-hide">
+            <button class="close" data-close="alert"></button>
+            <span> @L("PleaseEnterLoginInformation") </span>
+        </div>
+        <input id="ReturnUrlHash" type="hidden" name="returnUrlHash" />
+
+        @if (Model.IsMultiTenancyEnabled) {
+            <div class="form-group">
+                <!--ie8, ie9 does not support html5 placeholder, so we just show field title for that-->
+                <label class="control-label visible-ie8 visible-ie9">@L("Company")</label>
+                <input id="TenancyName" class="form-control form-control-solid placeholder-no-fix" type="text" autocomplete="off" placeholder="@L("Company")" name="TenancyName" maxlength="@AbpCompanyName.AbpProjectName.MultiTenancy.Tenant.MaxTenancyNameLength" />
+            </div>
+        } else {
+            <input type="hidden" id="TenancyName" value="">
+        }
+        <div class="form-group">
+            <!--ie8, ie9 does not support html5 placeholder, so we just show field title for that-->
+            <label class="control-label visible-ie8 visible-ie9">@L("LoginName")</label>
+            <input id="EmailAddressInput" class="form-control form-control-solid placeholder-no-fix" type="text" autocomplete="off" placeholder="@L("LoginName")" name="usernameOrEmailAddress" required maxlength="@AbpCompanyName.AbpProjectName.Users.User.MaxEmailAddressLength" />
+        </div>
+        <div class="form-group">
+            <label class="control-label visible-ie8 visible-ie9">@L("Password")</label>
+            <input id="PasswordInput" class="form-control form-control-solid placeholder-no-fix" type="password" autocomplete="off" placeholder="@L("Password")" name="password" required maxlength="@AbpCompanyName.AbpProjectName.Users.User.MaxPlainPasswordLength" />
+        </div>
+        <div class="form-actions">
+            <button type="submit" class="btn green uppercase">@L("Login")</button>
+            <label class="rememberme check">
+                <input id="RememberMeInput" type="checkbox" name="remember" value="1" />@L("RememberMe")
+            </label>
+            <a href="javascript:;" id="forget-password" class="forget-password">@L("ForgetPwd")</a>
+        </div>
+
+    </form>
+
+</div>
+<div class="language-switch-area">
+    <a href="/AbpLocalization/ChangeCulture?cultureName=en&returnUrl=/Account/Login">
+        <span class="language-icon " title="English"><i class="famfamfam-flag-gb"></i></span>
+    </a>
+
+    <a href="/AbpLocalization/ChangeCulture?cultureName=zh-CN&returnUrl=/Account/Login">
+        <span class="language-icon " title="简体中文"><i class="famfamfam-flag-cn"></i></span>
+    </a>
+
+</div>

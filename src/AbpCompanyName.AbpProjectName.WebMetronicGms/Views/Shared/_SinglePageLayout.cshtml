@@ -1,0 +1,85 @@
+﻿@using System.Threading
+@using System.Web.Optimization
+@using Abp.Timing
+@using Abp.Web.Mvc.Extensions
+@{
+    Layout = null;
+}
+
+
+<!DOCTYPE html>
+
+<!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
+<!--[if !IE]><!-->
+
+<html lang="en">
+<!--<![endif]-->
+<!-- BEGIN HEAD -->
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <meta content="" name="description" />
+    <meta content="" name="author" />
+    <link rel="shortcut icon" href="favicon.ico" />
+    <!-- css -->
+    @Styles.Render("~/Bundles/GLOBAL/css")
+
+    @Styles.Render("~/Bundles/GLOBAL/THEME/css")
+
+    @Styles.Render("~/Bundles/LAYOUT/THEME/css")
+
+    @Styles.Render("~/Bundles/Abp/css")
+
+    @Styles.Render("~/Bundles/PAGE/css")
+
+    @RenderSection("pageStyles", required: false)
+    <!-- script -->
+    <script type="text/javascript">
+        //This is used to get the application's root path from javascript. It's useful if you're running application in a virtual directory under IIS.
+        var abp = abp || {};
+        abp.appPath = '@ApplicationPath';
+    </script>
+
+    @Scripts.Render("~/Bundles/GLOBAL/js")
+    @Scripts.Render("~/Bundles/GLOBAL/THEME/js")
+    @Scripts.Render("~/Bundles/Abp/js")
+
+
+   
+
+    <!--[if lt IE 9]>
+    <script src="~/Content/global/plugins/respond.min.js"></script>
+    <script src="~/Content/global/plugins/excanvas.min.js"></script>
+    <![endif]-->
+
+
+    <title>GMS</title>
+</head>
+<body class="page-footer-fixed">
+
+    @RenderSection("pageLoadBeforScripts", required: false)
+    @RenderBody()
+
+    @Html.Partial("_Footer")
+<!-- ************************** -->
+
+
+    <script>
+            //Localizing momentjs
+            moment.locale('@Thread.CurrentThread.CurrentUICulture.Name');
+    </script>
+
+    <!-- Dynamic scripts of ABP system (They are created on runtime and can not be bundled) -->
+    <script src="~/api/AbpServiceProxies/GetAll?v=@(Clock.Now.Ticks)"></script>
+    <script src="~/AbpScripts/GetScripts?v=@(Clock.Now.Ticks)" type="text/javascript"></script>
+
+    <!-- SignalR scripts -->
+    <script src="~/signalr/hubs"></script>
+    @Html.IncludeScript("~/Abp/Framework/scripts/libs/abp.signalr.js")
+
+<!-- View specific scripts -->
+    @RenderSection("pageLoadAfterScripts", required: false)
+</body>
+</html>
