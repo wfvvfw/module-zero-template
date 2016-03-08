@@ -10,5 +10,9 @@ namespace AbpCompanyName.AbpProjectName.MultiTenancy
         ListResultOutput<TenantListDto> GetTenants();
 
         Task CreateTenant(CreateTenantInput input);
+
+        Task DeleteTenant(int id);
+
+        Task DisableTenant(int id);
     }
 }

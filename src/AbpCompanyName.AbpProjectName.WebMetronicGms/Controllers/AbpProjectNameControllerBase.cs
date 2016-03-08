@@ -1,7 +1,10 @@
-﻿using Abp.IdentityFramework;
+﻿using System.Collections.Generic;
+using Abp.IdentityFramework;
 using Abp.UI;
 using Abp.Web.Mvc.Controllers;
+using AbpCompanyName.AbpProjectName.WebMetronicGms.Models.UI.JqueryDatatables;
 using Microsoft.AspNet.Identity;
+using System.Web.Mvc;
 
 namespace AbpCompanyName.AbpProjectName.WebMetronicGms.Controllers
 {
@@ -15,6 +18,10 @@ namespace AbpCompanyName.AbpProjectName.WebMetronicGms.Controllers
             LocalizationSourceName = AbpProjectNameConsts.LocalizationSourceName;
         }
 
+        protected override void OnException(ExceptionContext context) {
+            base.OnException(context);
+        }
+
         protected virtual void CheckModelState()
         {
             if (!ModelState.IsValid)
@@ -26,6 +33,12 @@ namespace AbpCompanyName.AbpProjectName.WebMetronicGms.Controllers
         protected void CheckErrors(IdentityResult identityResult)
         {
             identityResult.CheckErrors(LocalizationManager);
+        }
+
+        protected JsonResult PageJson<T>(IReadOnlyList<T> result, PageRequest pageRequest)
+        {
+            var jsonResult = new DataResult<T>(result, pageRequest);
+            return Json(jsonResult);
         }
     }
 }

@@ -31,9 +31,11 @@ namespace AbpCompanyName.AbpProjectName.WebMetronicGms {
                         .Include("~/Metronic/assets/layouts/layout4/css/themes/light.min.css", new CssRewriteUrlTransform())
                         .Include("~/Metronic/assets/layouts/layout4/css/custom.min.css", new CssRewriteUrlTransform())
                 );
-
             bundles.Add(
                 new StyleBundle("~/Bundles/PAGE/css")
+                        .Include("~/Content/flags/famfamfam-flags.css", new CssRewriteUrlTransform())
+                        .Include("~/Metronic/assets/global/plugins/datatables/datatables.min.css", new CssRewriteUrlTransform())
+                        .Include("~/Metronic/assets/global/plugins/bootstrap/datatables.bootstrap.css", new CssRewriteUrlTransform())
                         .Include("~/Metronic/assets/global/plugins/select2/css/select2.min.css", new CssRewriteUrlTransform())
                         .Include("~/Metronic/assets/global/plugins/select2/css/select2-bootstrap.min.css", new CssRewriteUrlTransform())
                 );
@@ -74,8 +76,29 @@ namespace AbpCompanyName.AbpProjectName.WebMetronicGms {
             globaljs.Orderer = new AsIsBundleOrderer();
             bundles.Add(globaljs);
 
-            
 
+#if DEBUG
+            bundles.Add(
+               new ScriptBundle("~/Bundles/GLOBAL/THEME/js")
+                    .Include("~/Metronic/assets/global/scripts/app.js")
+                    .Include("~/Metronic/assets/layouts/layout4/scripts/layout.js")
+                    .Include("~/Metronic/assets/layouts/layout4/scripts/demo.js")
+                    .Include("~/Metronic/assets/layouts/global/scripts/quick-sidebar.js")
+               );
+
+            bundles.Add(
+             new ScriptBundle("~/Bundles/Page/js")
+                  .Include("~/Metronic/assets/global/scripts/datatable.js")
+                  .Include("~/Metronic/assets/global/plugins/datatables/datatables.js")
+                  .Include("~/Metronic/assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js")
+
+                  .Include("~/Metronic/assets/global/plugins/bootstrap-confirmation/bootstrap-confirmation.js")
+
+                  .Include("~/Metronic/assets/global/plugins/bootbox/bootbox.min.js")
+
+                  .Include("~/Scripts/main.js")
+             );
+#else
             bundles.Add(
                new ScriptBundle("~/Bundles/GLOBAL/THEME/js")
                     .Include("~/Metronic/assets/global/scripts/app.min.js")
@@ -83,6 +106,20 @@ namespace AbpCompanyName.AbpProjectName.WebMetronicGms {
                     .Include("~/Metronic/assets/layouts/layout4/scripts/demo.min.js")
                     .Include("~/Metronic/assets/layouts/global/scripts/quick-sidebar.min.js")
                );
+
+             bundles.Add(
+              new ScriptBundle("~/Bundles/Page/js")
+                   .Include("~/Metronic/assets/global/scripts/datatable.js")
+                   .Include("~/Metronic/assets/global/plugins/datatables/datatables.min.js")
+                   .Include("~/Metronic/assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js")
+
+                    .Include("~/Metronic/assets/global/plugins/bootstrap-confirmation/bootstrap-confirmation.min.js")
+                    
+                    .Include("~/Metronic/assets/global/plugins/bootbox/bootbox.min.js")
+                    .Include("~/Scripts/main.js")
+              );
+#endif
+
 
             bundles.Add(
                new ScriptBundle("~/Bundles/Abp/js")

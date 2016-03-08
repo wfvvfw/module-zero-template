@@ -16,11 +16,27 @@ namespace AbpCompanyName.AbpProjectName.WebMetronicGms {
             context.Manager.MainMenu
                 .AddItem(
                     new MenuItemDefinition(
-                        "Home",
-                        L("HomePage"),
+                        "BaseManage",
+                        L("BaseManage"),
                         url: "/",
                         icon: "fa fa-home",
                         requiresAuthentication: true
+                        ).AddItem(
+                            new MenuItemDefinition(
+                                    "TenantsManage",
+                                    L("TenantsManage"),
+                                    url: "/Tenants/Index",
+                                    icon: "fa fa-home",
+                                    requiresAuthentication: true
+                                ).AddItem(
+                                    new MenuItemDefinition(
+                                        "CreateTenant",
+                                        L("CreateTenant"),
+                                        url: "/Tenants/Index",
+                                        icon: "fa fa-home",
+                                        requiresAuthentication: true
+                                    )
+                                )
                         )
                 ).AddItem(
                     new MenuItemDefinition(

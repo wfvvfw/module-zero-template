@@ -3514,18 +3514,18 @@
     <Content Include="Metronic\assets\global\plugins\datatables\datatables.js" />
     <Content Include="Metronic\assets\global\plugins\datatables\datatables.min.css" />
     <Content Include="Metronic\assets\global\plugins\datatables\datatables.min.js" />
-    <Content Include="Metronic\assets\global\plugins\datatables\images\back_disabled.png" />
-    <Content Include="Metronic\assets\global\plugins\datatables\images\back_enabled.png" />
-    <Content Include="Metronic\assets\global\plugins\datatables\images\back_enabled_hover.png" />
-    <Content Include="Metronic\assets\global\plugins\datatables\images\favicon.ico" />
-    <Content Include="Metronic\assets\global\plugins\datatables\images\forward_disabled.png" />
-    <Content Include="Metronic\assets\global\plugins\datatables\images\forward_enabled.png" />
-    <Content Include="Metronic\assets\global\plugins\datatables\images\forward_enabled_hover.png" />
-    <Content Include="Metronic\assets\global\plugins\datatables\images\sort_asc.png" />
-    <Content Include="Metronic\assets\global\plugins\datatables\images\sort_asc_disabled.png" />
-    <Content Include="Metronic\assets\global\plugins\datatables\images\sort_both.png" />
-    <Content Include="Metronic\assets\global\plugins\datatables\images\sort_desc.png" />
-    <Content Include="Metronic\assets\global\plugins\datatables\images\sort_desc_disabled.png" />
+    <Content Include="Metronic\assets\global\plugins\datatables\DataTables-1.10.10\images\back_disabled.png" />
+    <Content Include="Metronic\assets\global\plugins\datatables\DataTables-1.10.10\images\back_enabled.png" />
+    <Content Include="Metronic\assets\global\plugins\datatables\DataTables-1.10.10\images\back_enabled_hover.png" />
+    <Content Include="Metronic\assets\global\plugins\datatables\DataTables-1.10.10\images\favicon.ico" />
+    <Content Include="Metronic\assets\global\plugins\datatables\DataTables-1.10.10\images\forward_disabled.png" />
+    <Content Include="Metronic\assets\global\plugins\datatables\DataTables-1.10.10\images\forward_enabled.png" />
+    <Content Include="Metronic\assets\global\plugins\datatables\DataTables-1.10.10\images\forward_enabled_hover.png" />
+    <Content Include="Metronic\assets\global\plugins\datatables\DataTables-1.10.10\images\sort_asc.png" />
+    <Content Include="Metronic\assets\global\plugins\datatables\DataTables-1.10.10\images\sort_asc_disabled.png" />
+    <Content Include="Metronic\assets\global\plugins\datatables\DataTables-1.10.10\images\sort_both.png" />
+    <Content Include="Metronic\assets\global\plugins\datatables\DataTables-1.10.10\images\sort_desc.png" />
+    <Content Include="Metronic\assets\global\plugins\datatables\DataTables-1.10.10\images\sort_desc_disabled.png" />
     <Content Include="Metronic\assets\global\plugins\datatables\plugins\bootstrap\datatables.bootstrap.css" />
     <Content Include="Metronic\assets\global\plugins\datatables\plugins\bootstrap\datatables.bootstrap.js" />
     <Content Include="Metronic\assets\global\plugins\dropzone\basic.min.css" />
@@ -5845,7 +5845,7 @@
     <Content Include="Metronic\assets\global\plugins\counterup\LICENSE" />
     <Content Include="Metronic\assets\global\plugins\counterup\README.md" />
     <Content Include="Metronic\assets\global\plugins\cubeportfolio\img\cbp-sprite.psd" />
-    <Content Include="Metronic\assets\global\plugins\datatables\images\Sorting icons.psd" />
+    <Content Include="Metronic\assets\global\plugins\datatables\DataTables-1.10.10\images\Sorting icons.psd" />
     <Content Include="Metronic\assets\global\plugins\dropzone\LICENSE" />
     <Content Include="Metronic\assets\global\plugins\dropzone\README.md" />
     <Content Include="Metronic\assets\global\plugins\dropzone\upload.php" />
@@ -6078,6 +6078,8 @@
     <Content Include="Metronic\assets\pages\media\blog\Thumbs.db" />
     <Content Include="Metronic\assets\pages\media\pages\Thumbs.db" />
     <Content Include="Metronic\assets\layouts\layout7\img\Thumbs.db" />
+    <Content Include="Metronic\assets\global\plugins\datatables\plugins\localisation\Chinese.json" />
+    <Content Include="Metronic\assets\global\plugins\datatables\plugins\localisation\English.json" />
     <None Include="Scripts\jquery-2.2.0.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -6095,6 +6097,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\json2.js" />
     <Content Include="Scripts\json2.min.js" />
+    <Content Include="Scripts\main.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\moment-with-locales.js" />
     <Content Include="Scripts\moment-with-locales.min.js" />
@@ -6114,6 +6117,8 @@
     <Content Include="Scripts\toastr.min.js" />
     <Content Include="Views\Account\_Layout.css" />
     <Content Include="Views\Account\Login.js" />
+    <Content Include="Views\Tenants\index.js" />
+    <Content Include="Views\Tenants\create.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -6140,6 +6145,9 @@
     <Compile Include="Models\Layout\LanguageSelectionViewModel.cs" />
     <Compile Include="Models\Layout\TopMenuViewModel.cs" />
     <Compile Include="Models\Layout\UserMenuOrLoginLinkViewModel.cs" />
+    <Compile Include="Models\Tenants\TenantViewModel.cs" />
+    <Compile Include="Models\UI\JqueryDatatables\PageRequest.cs" />
+    <Compile Include="Models\UI\JqueryDatatables\PageResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Views\AbpProjectNameWebViewPageBase.cs" />
   </ItemGroup>
@@ -6161,7 +6169,9 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\_Header.cshtml" />
     <Content Include="Views\Shared\_Sidebar.cshtml" />
-    <Content Include="Views\Shared\_PageHeader.cshtml" />
+    <Content Include="Views\Layout\_SideMenu.cshtml" />
+    <Content Include="Views\Tenants\Index.cshtml" />
+    <Content Include="Views\Tenants\Create.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -6173,7 +6183,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="Metronic\assets\apps\img\" />
     <Folder Include="Metronic\assets\global\plugins\angularjs\plugins\angular-file-upload\uploads\" />
-    <Folder Include="Views\Layout\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AbpCompanyName.AbpProjectName.Application\AbpCompanyName.AbpProjectName.Application.csproj">

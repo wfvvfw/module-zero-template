@@ -8,24 +8,21 @@ using AbpCompanyName.AbpProjectName.Authorization.Roles;
 using AbpCompanyName.AbpProjectName.Editions;
 using AbpCompanyName.AbpProjectName.MultiTenancy.Dto;
 using AbpCompanyName.AbpProjectName.Users;
+using Microsoft.AspNet.Identity;
 
-namespace AbpCompanyName.AbpProjectName.MultiTenancy
-{
-    public class TenantAppService : AbpProjectNameAppServiceBase, ITenantAppService
-    {
+namespace AbpCompanyName.AbpProjectName.MultiTenancy {
+    public class TenantAppService : AbpProjectNameAppServiceBase, ITenantAppService {
         private readonly TenantManager _tenantManager;
         private readonly RoleManager _roleManager;
         private readonly EditionManager _editionManager;
 
-        public TenantAppService(TenantManager tenantManager, RoleManager roleManager, EditionManager editionManager)
-        {
+        public TenantAppService(TenantManager tenantManager, RoleManager roleManager, EditionManager editionManager) {
             _tenantManager = tenantManager;
             _roleManager = roleManager;
             _editionManager = editionManager;
         }
 
-        public ListResultOutput<TenantListDto> GetTenants()
-        {
+        public ListResultOutput<TenantListDto> GetTenants() {
             return new ListResultOutput<TenantListDto>(
                 _tenantManager.Tenants
                     .OrderBy(t => t.TenancyName)
@@ -34,13 +31,11 @@ namespace AbpCompanyName.AbpProjectName.MultiTenancy
                 );
         }
 
-        public async Task CreateTenant(CreateTenantInput input)
-        {
+        public async Task CreateTenant(CreateTenantInput input) {
             //Create tenant
             var tenant = new Tenant(input.TenancyName, input.Name);
             var defaultEdition = await _editionManager.FindByNameAsync(EditionManager.DefaultEditionName);
-            if (defaultEdition != null)
-            {
+            if (defaultEdition != null) {
                 tenant.EditionId = defaultEdition.Id;
             }
 
@@ -48,8 +43,7 @@ namespace AbpCompanyName.AbpProjectName.MultiTenancy
             await CurrentUnitOfWork.SaveChangesAsync(); //To get new tenant's id.
 
             //We are working entities of new tenant, so changing tenant filter
-            using (CurrentUnitOfWork.SetFilterParameter(AbpDataFilters.MayHaveTenant, AbpDataFilters.Parameters.TenantId, tenant.Id))
-            {
+            using (CurrentUnitOfWork.SetFilterParameter(AbpDataFilters.MayHaveTenant, AbpDataFilters.Parameters.TenantId, tenant.Id)) {
                 //Create static roles for new tenant
                 CheckErrors(await _roleManager.CreateStaticRoles(tenant.Id));
 
@@ -68,6 +62,18 @@ namespace AbpCompanyName.AbpProjectName.MultiTenancy
                 CheckErrors(await UserManager.AddToRoleAsync(adminUser.Id, adminRole.Name));
                 await CurrentUnitOfWork.SaveChangesAsync();
             }
+        }
+
+        public async Task DeleteTenant(int id) {
+            var tenant = await _tenantManager.FindByIdAsync(id);
+
+            await _tenantManager.DeleteAsync(tenant);
+        }
+
+        public async Task DisableTenant(int id) {
+            Tenant tenant = await _tenantManager.FindByIdAsync(id);
+            tenant.IsActive = false;
+            await _tenantManager.UpdateAsync(tenant);
         }
     }
 }

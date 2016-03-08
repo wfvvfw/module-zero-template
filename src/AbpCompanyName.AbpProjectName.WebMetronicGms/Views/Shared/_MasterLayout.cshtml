@@ -44,7 +44,11 @@
 
     @Scripts.Render("~/Bundles/GLOBAL/js")
     @Scripts.Render("~/Bundles/GLOBAL/THEME/js")
+
     @Scripts.Render("~/Bundles/Abp/js")
+
+    @Scripts.Render("~/Bundles/Page/js")
+    
 
 
 
@@ -57,39 +61,44 @@
 
     <title>GMS</title>
 </head>
-<body class="page-container-bg-solid page-header-fixed page-sidebar-closed-hide-logo page-md">
+<body class="page-container-bg-solid page-header-fixed page-sidebar-closed-hide-logo page-footer-fixed page-md">
 
     @RenderSection("pageLoadBeforScripts", required: false)
 
     @Html.Partial("_Header")
-    <div class="page-container">
-        @Html.Partial("_Sidebar")
 
-        <div class="page-content-wrapper">
-            <div class="page-content">
-                @Html.Partial("_PageHeader")
-                @RenderBody()
-            </div>
+<div class="clearfix"> </div>
+    <!--page body-->
+<div class="page-container">
+    @Html.Partial("_Sidebar")
+
+    <div class="page-content-wrapper">
+        <div class="page-content">
+            @RenderBody()
         </div>
-        @Html.Partial("_Footer")
-        <!-- ************************** -->
+    </div>
+</div>
 
 
-        <script>
-            //Localizing momentjs
-            moment.locale('@Thread.CurrentThread.CurrentUICulture.Name');
-        </script>
+@Html.Partial("_Footer")
+    <!-- ************************** -->
 
-        <!-- Dynamic scripts of ABP system (They are created on runtime and can not be bundled) -->
-        <script src="~/api/AbpServiceProxies/GetAll?v=@(Clock.Now.Ticks)"></script>
-        <script src="~/AbpScripts/GetScripts?v=@(Clock.Now.Ticks)" type="text/javascript"></script>
 
-        <!-- SignalR scripts -->
-        <script src="~/signalr/hubs"></script>
-        @Html.IncludeScript("~/Abp/Framework/scripts/libs/abp.signalr.js")
+    <script>
+        //Localizing momentjs
+        moment.locale('@Thread.CurrentThread.CurrentUICulture.Name');
+    </script>
 
-        <!-- View specific scripts -->
-        @RenderSection("pageLoadAfterScripts", required: false)
+    <!-- Dynamic scripts of ABP system (They are created on runtime and can not be bundled) -->
+    <script src="~/api/AbpServiceProxies/GetAll?v=@(Clock.Now.Ticks)"></script>
+    <script src="~/AbpScripts/GetScripts?v=@(Clock.Now.Ticks)" type="text/javascript"></script>
+
+    <!-- SignalR scripts -->
+    <script src="~/signalr/hubs"></script>
+    @Html.IncludeScript("~/Abp/Framework/scripts/libs/abp.signalr.js")
+
+    <!-- View specific scripts -->
+    @RenderSection("pageLoadAfterScripts", required: false)
 </body>
 
 </html>

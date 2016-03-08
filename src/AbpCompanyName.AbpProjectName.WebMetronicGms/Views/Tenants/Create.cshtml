@@ -1,0 +1,61 @@
+﻿@using Abp.Web.Mvc.Extensions
+@using AbpCompanyName.AbpProjectName.MultiTenancy
+@model Abp.Application.Services.Dto.ListResultOutput<AbpCompanyName.AbpProjectName.MultiTenancy.Dto.TenantListDto>
+
+@{
+    Layout = null;
+}
+
+<div class="portlet box green">
+    <div class="portlet-title">
+        <div class="caption">
+            <i class="fa fa-gift"></i>@L("CreateNewTenant")
+        </div>
+        <div class="tools">
+            <a href="javascript:;" class="collapse"> </a>
+            <a href="javascript:;" class="reload"> </a>
+            @*<a href="javascript:;" class="remove"> </a>*@
+        </div>
+    </div>
+    <div class="portlet-body form">
+        <!-- BEGIN FORM-->
+        <form name="tenantCreateForm" role="form" novalidate class="form-validation form-horizontal">
+            <div class="form-body">
+
+                <div class="form-group">
+                    <label class="col-md-4 control-label">@L("TenancyName")</label>
+                    <div class="col-md-5">
+                        <input class="form-control" type="text" name="TenancyName" required maxlength="@Tenant.MaxTenancyNameLength" minlength="2">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-4 control-label">@L("Name")</label>
+                    <div class="col-md-5">
+                        <input type="text" name="Name" class="form-control" required maxlength="@Tenant.MaxNameLength">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-4 control-label">@L("AdminEmailAddress")</label>
+                    <div class="col-md-5">
+                        <input type="email" name="AdminEmailAddress" class="form-control" required maxlength="@AbpCompanyName.AbpProjectName.Users.User.MaxEmailAddressLength">
+                    </div>
+                </div>
+                <div class="col-md-offset-3 col-md-9">
+                    <p>@L("DefaultPasswordIs", AbpCompanyName.AbpProjectName.Users.User.DefaultPassword)</p>
+
+                </div>
+            </div>
+            <div class="form-actions">
+                <div class="row">
+                    <div class="col-md-offset-4 col-md-9">
+                        <button type="submit" class="btn green">Submit</button>&nbsp;&nbsp;&nbsp;
+                        <button type="button" class="btn btn-default" data-dismiss="modal">@L("Cancel")</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <!-- END FORM-->
+    </div>
+</div>
+
+@Html.IncludeScript("~/Views/Tenants/create.js")

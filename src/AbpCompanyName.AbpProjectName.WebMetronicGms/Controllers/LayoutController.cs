@@ -40,6 +40,18 @@ namespace AbpCompanyName.AbpProjectName.WebMetronicGms.Controllers
         }
 
         [ChildActionOnly]
+        public PartialViewResult SideMenu(string activeMenu = "") {
+            var model = new TopMenuViewModel
+                        {
+                MainMenu = AsyncHelper.RunSync(() => _userNavigationManager.GetMenuAsync("MainMenu", AbpSession.UserId)),
+                ActiveMenuItemName = activeMenu
+            };
+
+            return PartialView("_SideMenu", model);
+        }
+
+
+        [ChildActionOnly]
         public PartialViewResult LanguageSelection()
         {
             var model = new LanguageSelectionViewModel

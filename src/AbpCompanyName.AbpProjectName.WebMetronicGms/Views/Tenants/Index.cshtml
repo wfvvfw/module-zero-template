@@ -1,0 +1,66 @@
+﻿@using Abp.Web.Mvc.Extensions
+@{
+    ViewBag.Title = L("TenantsManage");
+    ViewBag.SmallTitle = L("TenantsManageInfo");
+}
+@section pageLoadBeforScripts
+{
+    <style type="text/css">
+        /*.table thead  tr , tfoot tr {
+            background-color: #c0edf1;
+        }*/
+    </style>
+}
+@section pageLoadAfterScripts{
+    @Html.IncludeScript("~/Views/Tenants/index.js")
+}
+
+<div class="page-head">
+    <!-- BEGIN PAGE TITLE -->
+    <div class="page-title">
+        <h1>
+            @ViewBag.Title
+            <small>@ViewBag.SmallTitle</small>
+        </h1>
+    </div>
+    <!-- END PAGE TITLE -->
+    <!-- BEGIN PAGE TOOLBAR -->
+    <div class="page-toolbar">
+
+    </div>
+    <!-- END PAGE TOOLBAR -->
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <!-- BEGIN EXAMPLE TABLE PORTLET-->
+        <div class="portlet light bordered">
+            <div class="portlet-title">
+                <div class="col-md-6">
+                    <div class="btn-group">
+                        <a class="btn green " href='@Url.Action("Create")' data-target="#TenantCreateModal" data-toggle="modal">
+                            @L("Create")
+                            <i class="fa fa-plus"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="portlet-body">
+                <table class="table table-striped table-bordered table-hover table-header-fixed" width="100%" id="tbTenant">
+                    
+                </table>
+            </div>
+        </div>
+        <!-- END EXAMPLE TABLE PORTLET-->
+
+        <div class="modal fade draggable-modal" id="TenantCreateModal" tabindex="-1" role="dialog" aria-labelledby="TenantCreateModalLabel" data-backdrop="static">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <img src="~/Metronic/assets/global/img/loading-spinner-grey.gif" alt="" class="loading">
+                        <span> &nbsp;&nbsp;Loading... </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
